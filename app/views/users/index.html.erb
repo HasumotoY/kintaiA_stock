@@ -1,0 +1,33 @@
+<% provide(:title,"ユーザー一覧") %>
+
+<div class="col-md-10 col-md-offset-1">
+  
+  <div class="row">
+    <%= form_tag import_users_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "CSVファイルをインポート",class: "btn btn-primary" %>
+    <% end %>  
+  </div>
+  
+  <% @users.each do |user| %>
+    <table class="table table-condensed table-striped" id="users-table">
+      <thead>
+        <td><%= user.employee_number %></td>
+        <td><%= user.uid %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+      </thead>
+      
+      <thead>
+        <td>
+          <%= link_to "削除",user, method: :delete, 
+            data:{confirm: "削除してもよろしいですか？"}, class: "btn btn-primary" %>
+        </td>
+      </thead>
+      
+      <tbody>
+        <td><%= link_to "編集", "#",  class: "btn btn-primary" %></th>
+      </tbody>
+    </table>
+  <% end %>
+</div>

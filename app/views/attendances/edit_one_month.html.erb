@@ -1,0 +1,66 @@
+<% provide(:title,@user.name) %>
+<% provide(:class_text,"edit-attendaces") %>
+<%= form_with(model: @user, url: attendances_update_one_month_user_path(date: @first_day), local: true, method: :patch) do |f| %>
+<%= render 'shared/error_messages' %>
+
+<div class="col-md-10 col-md-offset-1">
+  <table class="table table-condenced table-bordered table-hover table-striped" id="table-edit-attendances">
+    <thead>
+      <tr>
+        <td>日付</td>
+        <td>曜日</td>
+        <td>出社</td>
+        <td>退社</td>
+        <td>在社時間合計</td>
+        <td>備考</td>
+        <td>残業指示</td>
+        <td>指示者</td>
+      </tr> 
+    </thead>
+      <% @attendances.each do |day| %>
+        <%= f.fields_for "attendances[]", day do |attendance| %>
+          <tbody>
+            <tr>
+              <td><%= l(day.worked_on, format: :short) %></td>
+      
+              <% days_color =
+                case $days_of_the_week[day.worked_on.wday]
+                when '土'
+                  'text-info'
+                when '日'
+                  'text-danger'
+                end %>
+                
+              <td class="<%= days_color %>">
+                <%= $days_of_the_week[day.worked_on.wday] %>
+              </td>
+              
+              <% if Date.current < day.worked_on %>
+                <td><%= attendance.time_field :started_at, readonly: true, class: "form-control" %></td>
+                <td><%= attendance.time_field :finished_at,readonly: true, class: "form-control" %></td>
+              <% else %>
+                <td><%= attendance.time_field :started_at, class: "form-control" %></td>
+                <td><%= attendance.time_field :finished_at, class: "form-control" %></td>
+              <% end %>
+              
+              <td>
+                <% if day.started_at.present? && day.finished_at.present? %>
+                  <%= working_times(day.started_at,day.finished_at) %>
+                <% end %>
+              </td>
+              
+              <td><%= attendance.text_field :note ,class: "form-control" %></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        <% end %>
+      <% end %>  
+    </div>  
+  </table>
+  
+  <div class="center">
+    <%= f.submit "編集を保存する", class: "btn btn-primary btn-edit-attendances" %>
+    <%= link_to "キャンセル",user_path(date: @first_day), class: "btn btn-default btn-edit-attendances" %>
+  </div>
+<% end %>
