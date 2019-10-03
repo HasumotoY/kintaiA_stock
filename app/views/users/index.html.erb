@@ -4,7 +4,7 @@
   
   <div class="row">
     <%= form_tag import_users_path, multipart: true do %>
-      <%= file_field_tag :file %>
+      <%= file_field_tag :file,class: "form-control" %>
       <%= submit_tag "CSVファイルをインポート",class: "btn btn-primary" %>
     <% end %>  
   </div>
@@ -12,7 +12,7 @@
   <% @users.each do |user| %>
     <table class="table table-condensed table-striped" id="users-table">
       <thead>
-        <td><%= user.employee_number %></td>
+        <td><%= user.id %></td>
         <td><%= user.uid %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
