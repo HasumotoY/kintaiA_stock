@@ -10,20 +10,20 @@
           <%= link_to "→",user_path(date: @first_day.next_month), class: "btn btn-primary" %>
         </td>
         <td>
-          勤務開始時刻 
-          <br>勤務終了時刻</br>
+          勤務開始時刻  <%= format_basic_info(@user.designated_work_start_time) %>
+          <br>勤務終了時刻 <%= format_basic_info(@user.designated_work_end_time) %></br>
         </td>
-        <td colspan="3">基本時間</td>
-        <td>初日</td>
+        <td colspan="3">基本時間 <%= format_basic_info(@user.basic_work_time) %></td>
+        <td>初日<%= l(@first_day.beginning_of_month, format: :short) %></td>
       </tr>
       
       <tr>
-        <td>所属 <%= @user.affiliation.present? ? @user.department : "未所属" %></td>
+        <td>所属 <%= @user.affiliation.present? ? @user.affiliation : "未所属" %></td>
         <td>氏名 <%= @user.name %></td>
         <td>コード</td>
         <td></td>
         <td>出勤日数 : <%= @worked_sum %>日</td>
-        <td>締め</td>
+        <td>締め <%= l(@first_day.end_of_month, format: :short) %></td>
       </tr>
     </tbody>
   </table>

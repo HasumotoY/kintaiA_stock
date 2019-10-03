@@ -13,7 +13,7 @@ class User < ApplicationRecord
     
   validates :affiliation, length: {in: 2..50}, allow_blank: true
   
-  validates :employee_number,presence: true
+  validates :employee_number, uniqueness: true, allow_blank: true
   
   validates :uid, presence: true
   
@@ -55,10 +55,16 @@ class User < ApplicationRecord
   end
   
   def self.import(file)
-    CSV.foreach(file.path,headers: true) do |row|
-      user = find_by(uid: row["uid"]) || new
+    CSV.foreach(file.path, headers: true) do |row|
+      user = find_by(id: row["id"]) || new
       user.attributes = row.to_hash.slice(*updatable_attributes)
       user.save
     end
+  end
+  
+  def self.updatable_attributes
+    ["id","name","email","affiliation","employee_number","uid",
+    "basic_work_time","designated_work_start_time","designated_work_end_time",
+    "superior","admin","password"]
   end
 end
