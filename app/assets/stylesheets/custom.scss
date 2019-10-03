@@ -79,6 +79,39 @@ p{
   text-decoration: none;
 }
 
+.admin-font{
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: #a94442;
+    text-transform: uppercase;
+    letter-spacing: -1;
+    padding-top: 9px;
+    font-weight: bold;
+}
+
+.superior-font{
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: #31708f;
+    text-transform: uppercase;
+    letter-spacing: -1;
+    padding-top: 9px;
+    font-weight: bold;
+}
+
+.users-font{
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: #3c763d;
+    text-transform: uppercase;
+    letter-spacing: -1;
+    padding-top: 9px;
+    font-weight: bold;
+}
+
 /* new */
 
 .label-new{
