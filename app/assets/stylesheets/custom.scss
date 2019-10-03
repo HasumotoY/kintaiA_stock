@@ -138,10 +138,16 @@ p{
 .btn-edit-basic{
     margin-top: 10px;
 }
-/* basic-info-modal */
 
-.modal-dialog-center{
-  padding-top: 10%;
+/* csv-form */
+.form-csv{
+    border: 1px solid #bbb;
+    width: 35%;
+}
+
+.btn-csv{
+    margin-top: 10px;
+    width: 35%;
 }
 
 /* user-attendances-table */
@@ -178,6 +184,7 @@ p{
     margin-bottom: 5px;
     margin-left: 10px;
 }
+
 /* error_explanation */
 #error_explanation{
     color: red;

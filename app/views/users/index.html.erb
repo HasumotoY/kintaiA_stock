@@ -1,21 +1,21 @@
 <% provide(:title,"ユーザー一覧") %>
+<h1>ユーザー一覧</h1>
 
 <div class="col-md-10 col-md-offset-1">
   
-  <div class="row">
+  <div class="csv_zone">
     <%= form_tag import_users_path, multipart: true do %>
-      <%= file_field_tag :file,class: "form-control" %>
-      <%= submit_tag "CSVファイルをインポート",class: "btn btn-primary" %>
+      <%= file_field_tag :file , class: "form-csv"%>
+      <%= submit_tag "CSVファイルをインポート",class: "btn btn-primary btn-csv" %>
     <% end %>  
   </div>
   
   <% @users.each do |user| %>
     <table class="table table-condensed table-striped" id="users-table">
       <thead>
-        <td><%= user.id %></td>
-        <td><%= user.uid %></td>
+    
         <td><%= user.name %></td>
-        <td><%= user.email %></td>
+        
       </thead>
       
       <thead>
@@ -26,7 +26,7 @@
       </thead>
       
       <tbody>
-        <td><%= link_to "編集", "#",  class: "btn btn-primary" %></th>
+        <td><%= link_to "編集", "#",  class: "btn btn-primary btn-lg" %></th>
       </tbody>
     </table>
   <% end %>
