@@ -1,4 +1,6 @@
 <% provide(:title,"ユーザー一覧") %>
+<% provide(:class_text,"user--edit") %>
+<% provide(:button_text,"編集する") %>
 <h1>ユーザー一覧</h1>
 
 <div class="col-md-10 col-md-offset-1">
@@ -11,23 +13,32 @@
   </div>
   
   <% @users.each do |user| %>
-    <table class="table table-condensed table-striped" id="users-table">
-      <thead>
-    
-        <td><%= user.name %></td>
-        
-      </thead>
-      
-      <thead>
-        <td>
-          <%= link_to "削除",user, method: :delete, 
+    <div class="row">
+      <ul id="users-table">
+        <li>
+          <%= user.name %>
+          <br>|<%= link_to "削除",user, method: :delete, 
             data:{confirm: "削除してもよろしいですか？"}, class: "btn btn-primary" %>
-        </td>
-      </thead>
-      
-      <tbody>
-        <td><%= link_to "編集", "#",  class: "btn btn-primary btn-lg" %></th>
-      </tbody>
-    </table>
+        </li>
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <button data-toggle="collapse" data-target="#collapse<%= user.id %>" class="btn btn-primary btn-lg index-edit-btn">
+                編集
+              </button>
+            </div>
+            <div id="collapse<%= user.id %>" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <%= render'form' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </div>
   <% end %>
 </div>
