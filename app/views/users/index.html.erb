@@ -15,29 +15,31 @@
   <% @users.each do |user| %>
     <div class="row">
       <ul id="users-table">
-        <li>
-          <%= user.name %>
-          <br>|<%= link_to "削除",user, method: :delete, 
-            data:{confirm: "削除してもよろしいですか？"}, class: "btn btn-primary" %>
-        </li>
-        <div class="panel-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <button data-toggle="collapse" data-target="#collapse<%= user.id %>" class="btn btn-primary btn-lg index-edit-btn">
-                編集
-              </button>
-            </div>
-            <div id="collapse<%= user.id %>" class="panel-collapse collapse">
-              <div class="panel-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <%= render'form' %>
+        <% unless user.admin? %>
+          <li>
+            <%= user.name %>
+            <br>|<%= link_to "削除",user, method: :delete, 
+              data:{confirm: "削除してもよろしいですか？"}, class: "btn btn-primary" %>
+          </li>
+          <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <button data-toggle="collapse" data-target="#collapse<%= user.id %>" class="btn btn-primary btn-lg index-edit-btn">
+                  編集
+                </button>
+              </div>
+              <div id="collapse<%= user.id %>" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <%= render'form' %>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </ul>
     </div>
   <% end %>
