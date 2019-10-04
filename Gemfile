@@ -10,6 +10,8 @@ end
 gem 'rails', '~> 5.1.6'
 gem 'rails-i18n'
 gem 'bootstrap-sass'
+gem 'bootstrap-will_paginate'
+gem 'will_paginate'
 gem 'faker'
 gem 'bcrypt'
 gem 'jquery-rails'

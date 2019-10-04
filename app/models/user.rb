@@ -62,6 +62,14 @@ class User < ApplicationRecord
     end
   end
   
+  def self.search(search)
+        if search
+            where(['name LIKE ?', "%#{search}%"])
+        else
+            all
+        end
+    end
+  
   def self.updatable_attributes
     ["id","name","email","affiliation","employee_number","uid",
     "basic_work_time","designated_work_start_time","designated_work_end_time",

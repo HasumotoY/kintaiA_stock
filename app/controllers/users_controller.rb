@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show,:edit,:update, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :set_user, only: [:show,:edit,:update, :destroy, :edit_basic_info, :update_basic_info,:working_users]
   before_action :logged_in?, only: [:index,:show,:edit,:update]
   before_action :logged_in_user, only: [:show,:edit,:update,:destroy, :edit_basic_info, :update_basic_info]
   before_action :admin_user, only: [:index,:edit,:update,:destroy]
-  before_action :set_one_month, only: :show
+  before_action :set_one_month, only: [:show]
+  
+  
   before_action :admin_or_correct_user, only: :show
   
   EDIT_ERROR_MESSAGE = "入力内容に問題があります。"
@@ -28,7 +30,17 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page]).search(params[:search])
+  end
+  
+  def search
+    if params[:search] == ""
+      render users_url
+        flash[:danger] = "検索結果がありません"
+    else    
+       @users = User.paginate(page: params[:page]).search(params[:search])
+       render users_url
+    end 
   end
   
   def edit
@@ -57,6 +69,10 @@ class UsersController < ApplicationController
   def import
     User.import(params[:file])
     redirect_to users_url
+  end
+  
+  def working_users
+    @users = User.all
   end
   
   private
