@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show,:edit,:update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :logged_in?, only: [:index,:show,:edit,:update]
   before_action :logged_in_user, only: [:show,:edit,:update,:destroy, :edit_basic_info, :update_basic_info]
-  before_action :correct_user, only: [:edit,:update]
-  before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :admin_user, only: [:index,:edit,:update,:destroy]
   before_action :set_one_month, only: :show
   before_action :admin_or_correct_user, only: :show
   
@@ -38,27 +37,15 @@ class UsersController < ApplicationController
   def update
     if @user.update_attributes(user_params)
       flash[:success]  ="情報を更新しました。"
-      redirect_to @user
+      redirect_to users_path
     else
-      flash[:danger] = EDIT_ERROR_MESSAGE
-      render :edit
+      flash[:danger]="情報の更新が失敗しました。<br>" + @user.errors.full_messages.join('<br>')
+      redirect_to users_url
     end
   end
   
   def destroy
     @user.destroy
-  end
-  
-  def edit_basic_info
-  end
-  
-  def update_basic_info
-    if @user.update_attributes(basic_info_params)
-      flash[:success]="#{@user.name}さんの基本情報を更新しました。"
-    else
-      flash[:danger]="#{@user.name}さんの更新は失敗しました。<br>" + @user.errors.full_messages.join('<br>')
-    end
-    redirect_to users_url
   end
 
   def destroy
@@ -75,11 +62,8 @@ class UsersController < ApplicationController
   private
   
     def user_params
-      params.require(:user).permit(:name,:email,:password,:password_confirmation,:affiliation)
+      params.require(:user).permit(:name,:email,:password,:password_confirmation,:affiliation,
+                                    :employee_number,:uid, :basic_work_time,:id,
+                                    :designated_work_start_time,:designated_work_end_time)
     end
-    
-    def basic_info_params
-      params.require(:user).permit(:affiliation,:basic_time, :designated_work_start_time,:designated_work_finish_time)
-    end
-
 end
