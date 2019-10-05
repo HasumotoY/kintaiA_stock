@@ -72,7 +72,9 @@ class UsersController < ApplicationController
   end
   
   def working_users
-    @users = User.all
+    User.all.each do |users|
+      users.attendances.any?{|day|}
+    end
   end
   
   private
