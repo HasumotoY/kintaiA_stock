@@ -24,3 +24,11 @@ User.create!(name: "上長B", email: "superior2@email.com",
               password_confirmation: password, employee_number: employee_number,
               uid: uid)
 end
+
+3.times do |n|
+  base_number = n+1
+  name = "拠点#{n+1}"
+  bases_status = "勤務中"
+  Base.create!(base_number: base_number,name: name, 
+                bases_status: bases_status)
+end

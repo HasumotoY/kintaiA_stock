@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191002131730) do
+ActiveRecord::Schema.define(version: 20191005112808) do
 
   create_table "attendances", force: :cascade do |t|
     t.date "worked_on"
@@ -22,14 +22,23 @@ ActiveRecord::Schema.define(version: 20191002131730) do
     t.integer "user_id"
   end
 
+  create_table "bases", force: :cascade do |t|
+    t.string "name"
+    t.boolean "base_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "bases_status"
+    t.integer "base_number"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "affiliation"
     t.string "uid"
-    t.datetime "basic_work_time", default: "2019-10-02 23:00:00"
-    t.datetime "designated_work_start_time", default: "2019-10-03 00:00:00"
-    t.datetime "designated_work_end_time", default: "2019-10-03 09:00:00"
+    t.datetime "basic_work_time", default: "2019-10-04 23:00:00"
+    t.datetime "designated_work_start_time", default: "2019-10-05 00:00:00"
+    t.datetime "designated_work_end_time", default: "2019-10-05 09:00:00"
     t.boolean "superior", default: false
     t.boolean "admin", default: false
     t.string "password_digest"

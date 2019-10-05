@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  
+  #勤務中社員一覧
   get 'working_users', to:'users#working_users' 
+  
   resources :users do
     member do
       get 'edit_basic_info'
@@ -17,5 +20,7 @@ Rails.application.routes.draw do
     resources :attendances, only: :update
     collection { post :import }
   end
+  
+  resources :bases
 
-  end
+end

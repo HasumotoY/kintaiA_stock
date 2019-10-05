@@ -218,6 +218,23 @@ p{
     margin-left: 10px;
 }
 
+/* base-info */
+.label-base-new{
+    margin-top: 5px;
+}
+
+.btn-base-new{
+    margin-top: 10px;
+}
+
+.label-base-edit{
+    margin-top: 5px;
+}
+
+.btn-base-edit{
+    margin-top: 10px;
+}
+
 /* error_explanation */
 #error_explanation{
     color: red;
@@ -232,4 +249,9 @@ p{
     .form-control{
         color: $state-danger-text;
     }
+}
+
+/* modal-style */
+.modal-dialog-center{
+    padding-top: 10%;
 }
