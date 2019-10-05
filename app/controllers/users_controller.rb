@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show,:edit,:update, :destroy, :edit_basic_info, :update_basic_info,:working_users]
+  before_action :set_user, only: [:show,:edit,:update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :logged_in?, only: [:index,:show,:edit,:update]
   before_action :logged_in_user, only: [:show,:edit,:update,:destroy, :edit_basic_info, :update_basic_info]
   before_action :admin_user, only: [:index,:edit,:update,:destroy]
@@ -72,7 +72,9 @@ class UsersController < ApplicationController
   end
   
   def working_users
-    @users = User.all
+    User.all.each do |users|
+      users.attendances.any?{|day|}
+    end
   end
   
   private
