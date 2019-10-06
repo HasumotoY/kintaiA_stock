@@ -9,6 +9,15 @@ Rails.application.routes.draw do
   #勤務中社員一覧
   get 'working_users', to:'users#working_users' 
   
+  
+  #拠点一覧
+  get '/bases', to:'bases#index'
+  get '/bases', to: 'bases#new'
+  post '/bases', to:'bases#create'
+  get 'edit/:id', to:'bases#edit'
+  patch 'update/:id', to: 'bases#update'
+  delete 'destroy/:id', to: 'bases#destroy'
+  
   resources :users do
     member do
       get 'edit_basic_info'
