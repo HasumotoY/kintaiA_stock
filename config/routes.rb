@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   get '/bases', to:'bases#index'
   get '/bases', to: 'bases#new'
   post '/bases', to:'bases#create'
-  get 'edit/:id', to:'bases#edit'
-  patch 'update/:id', to: 'bases#update'
-  delete 'destroy/:id', to: 'bases#destroy'
+  get 'edit_bases/:id', to:'bases#edit'
+  patch 'update_bases/:id', to: 'bases#update'
+  delete '/destroy', to: 'bases#destroy'
   
   resources :users do
     member do

@@ -55,10 +55,6 @@ class UsersController < ApplicationController
       redirect_to users_url
     end
   end
-  
-  def destroy
-    @user.destroy
-  end
 
   def destroy
     @user.destroy
