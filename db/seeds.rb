@@ -18,14 +18,14 @@ User.create!(name: "上長B", email: "superior2@email.com",
   email= "sample#{n+1}@email.com"
   password= "password"
   employee_number = 4+n
-  uid = "#{0004+n}"
+  uid = "0004#{+n}"
   
   User.create!(name: name,email: email, password: password,
               password_confirmation: password, employee_number: employee_number,
               uid: uid)
 end
 
-3.times do |n|
+10.times do |n|
   base_number = n+1
   name = "拠点#{n+1}"
   bases_status = "勤務中"

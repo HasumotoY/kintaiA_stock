@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   EDIT_ERROR_MESSAGE = "入力内容に問題があります。"
   
   def new
-  @user = User.new
+    @user = User.new
   end
   
   def create

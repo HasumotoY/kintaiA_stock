@@ -9,14 +9,10 @@ Rails.application.routes.draw do
   #勤務中社員一覧
   get 'working_users', to:'users#working_users' 
   
-  
   #拠点一覧
-  get '/bases', to:'bases#index'
-  get '/bases', to: 'bases#new'
-  post '/bases', to:'bases#create'
-  get 'edit_bases/:id', to:'bases#edit'
-  patch 'update_bases/:id', to: 'bases#update'
-  delete '/destroy', to: 'bases#destroy'
+  resources :bases 
+  get '/new', to: 'bases#new'
+  post '/new', to: 'bases#create'
   
   resources :users do
     member do
@@ -28,7 +24,4 @@ Rails.application.routes.draw do
     resources :attendances, only: :update
     collection { post :import }
   end
-  
-  resources :bases
-
 end

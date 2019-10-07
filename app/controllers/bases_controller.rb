@@ -1,6 +1,6 @@
 class BasesController < ApplicationController
-  
-  before_action :set_base, only: [:edit,:update,:destroy]
+  before_action :set_base, only: [:destroy,:edit,:update]
+  before_action :admin_user, only: [:destroy,:edit,:update]
   
   def new
     @base = Base.new
@@ -10,11 +10,10 @@ class BasesController < ApplicationController
     @base = Base.new(base_params)
     if @base.save
       flash[:success]="拠点情報を追加しました。"
-      redirect_to bases_path
     else
       flash[:danger]="情報追加に失敗しました。<br>" + @base.errors.full_messages('<br>')
-      redirect_to bases_url
     end
+    redirect_to bases_url
   end
   
   def index
@@ -23,16 +22,17 @@ class BasesController < ApplicationController
   end
   
   def edit
+    @base = Base.find(params[:id])
   end
   
   def update
+    @base = Base.find(parasm[:id])
     if @base.update_attributes(base_params)
       flash[:success] ="拠点情報を更新しました。"
-      redirect_to bases_path
     else
       flash[:danger]="情報更新に失敗しました。<br>" + @base.errors.full_messages('<br')
-      redirect_to bases_url
     end
+    redirect_to bases_url
   end
   
   def destroy
@@ -44,7 +44,7 @@ class BasesController < ApplicationController
     private
     
       def base_params
-        params.require(:base).permit(:base_number,:base_name,:base_status)
+        params.require(:base).permit(:base_number,:name,:bases_status)
       end
       
       def set_base
