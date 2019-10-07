@@ -30,6 +30,7 @@ class AttendancesController < ApplicationController
   end
   
   def update_one_month
+    
     if attendances_invalid?
       ActiveRecord::Base.transaction do
         attendances_params.each do |id,item|
@@ -57,16 +58,18 @@ class AttendancesController < ApplicationController
     def attendances_invalid?
       attendances = true
       attendances_params.each do |id,item|
-        if item[:started_at].blank? && item[:finished_at].blank?
-          next
-        elsif item[:started_at] > item[:finished_at]
-          attendances = false
-          break
-        elsif item[:started_at].blank? || item[:finished_at].blank?
-          attendances = false
-          break
+        unless Date.current == item[:worked_on]
+          if item[:started_at].blank? && item[:finished_at].blank?
+            next
+          elsif item[:started_at] > item[:finished_at]
+            attendances = false
+            break
+          elsif item[:started_at].blank? || item[:finished_at].blank?
+            attendances = false
+            break
+          end
         end
+        return attendances
       end
-      return attendances
     end
 end
