@@ -18,7 +18,7 @@
     <tbody>
       <% @bases.each do |base| %>
         <tr>
-          <td><%= link_to "修正",edit_basis_path(base), remote: true, class:"btn btn-primary" %></td>
+          <td><%= link_to "修正",edit_basis_path(base),class:"btn btn-primary" %></td>
           <td><%= link_to "削除",base,method: :delete,
                    data:{confirm: "削除してもよろしいですか？"},class:"btn btn-primary" %></td>
           <td><%= base.base_number %></td>
@@ -32,16 +32,10 @@
     <table>
     <tbody>
       <tr>
-        <a href="#modal01" class="modalOpen btn btn-primary btn-lg">拠点情報追加</a>
-        <div class="modal" id="modal01">
-        <div class="overLay modalClose"></div>
-        <div class="inner">
-          <%= render 'form' %>
-        </div>
-      </div>
+        <td>
+          <%= link_to "追加", new_basis_path,class: "btn btn-primary btn-lg" %>
+        </td>
       </tr>
-      
     </tbody>
   </table>
 </div>
-<div id="edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div> 

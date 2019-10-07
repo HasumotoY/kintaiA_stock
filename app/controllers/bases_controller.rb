@@ -11,7 +11,7 @@ class BasesController < ApplicationController
     if @base.save
       flash[:success]="拠点情報を追加しました。"
     else
-      flash[:danger]="情報追加に失敗しました。<br>" + @base.errors.full_messages('<br>')
+      flash[:danger]="情報追加に失敗しました。<br>" + @base.errors.full_messages.join('<br>')
     end
     redirect_to bases_url
   end
@@ -26,11 +26,10 @@ class BasesController < ApplicationController
   end
   
   def update
-    @base = Base.find(parasm[:id])
     if @base.update_attributes(base_params)
       flash[:success] ="拠点情報を更新しました。"
     else
-      flash[:danger]="情報更新に失敗しました。<br>" + @base.errors.full_messages('<br')
+      flash[:danger]="情報更新に失敗しました。<br>" + @base.errors.full_messages.join('<br>')
     end
     redirect_to bases_url
   end
