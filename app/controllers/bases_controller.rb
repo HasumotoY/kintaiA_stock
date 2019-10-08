@@ -1,6 +1,8 @@
 class BasesController < ApplicationController
   before_action :set_base, only: [:destroy,:edit,:update]
   before_action :admin_user, only: [:destroy,:edit,:update]
+  before_action :new, only: :index
+  helper_method :sort_column, :sort_direction
   
   def new
     @base = Base.new
@@ -17,7 +19,7 @@ class BasesController < ApplicationController
   end
   
   def index
-    @bases = Base.all
+    @bases = Base.all.order(sort_column + ' ' + sort_direction)
 
   end
   
@@ -49,4 +51,13 @@ class BasesController < ApplicationController
       def set_base
         @base = Base.find(params[:id])
       end
+      
+      def sort_direction
+        %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+      end
+
+      def sort_column
+          User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      end
+  
 end

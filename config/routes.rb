@@ -10,10 +10,9 @@ Rails.application.routes.draw do
   get 'working_users', to:'users#working_users' 
   
   #拠点一覧
-  resources :bases 
-  get '/new', to: 'bases#new'
-  post '/new', to: 'bases#create'
-  
+  resources :bases do
+    patch 'update_base_info', to:'bases#update'
+  end
   resources :users do
     member do
       get 'edit_basic_info'
