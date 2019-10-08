@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   
   #拠点一覧
   resources :bases do
-    patch 'update_base_info', to:'bases#update'
   end
+  
   resources :users do
     member do
       get 'edit_basic_info'
