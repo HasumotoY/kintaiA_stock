@@ -18,7 +18,7 @@ User.create!(name: "上長B", email: "superior2@email.com",
   email= "sample#{n+1}@email.com"
   password= "password"
   employee_number = 4+n
-  uid = "0004#{+n}"
+  uid = "000#{4+n}"
   
   User.create!(name: name,email: email, password: password,
               password_confirmation: password, employee_number: employee_number,

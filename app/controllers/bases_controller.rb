@@ -1,6 +1,7 @@
 class BasesController < ApplicationController
   before_action :set_base, only: [:destroy,:edit,:update]
   before_action :admin_user, only: [:destroy,:edit,:update]
+  before_action :new, only: :index
   
   def new
     @base = Base.new
@@ -26,7 +27,7 @@ class BasesController < ApplicationController
   end
   
   def update
-    @base = Base.find(parasm[:id])
+    @base = Base.find(params[:id])
     if @base.update_attributes(base_params)
       flash[:success] ="拠点情報を更新しました。"
     else

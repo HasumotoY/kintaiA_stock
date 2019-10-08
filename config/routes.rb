@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   
   #拠点一覧
   resources :bases 
-  get '/new', to: 'bases#new'
-  post '/new', to: 'bases#create'
   
   resources :users do
     member do

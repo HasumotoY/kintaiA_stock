@@ -32,15 +32,25 @@
     <table>
     <tbody>
       <tr>
-        <a href="#modal01" class="modalOpen btn btn-primary btn-lg">拠点情報追加</a>
-        <div class="modal" id="modal01">
-        <div class="overLay modalClose"></div>
-        <div class="inner">
-          <%= render 'form' %>
+       <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <button data-toggle="collapse" data-target="#collapse0" class="btn btn-primary btn-lg index-edit-btn">
+              拠点情報追加
+            </button>
+          </div>
+          <div id="collapse0" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <%= render 'form' %>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </tr>
-      
     </tbody>
   </table>
 </div>
