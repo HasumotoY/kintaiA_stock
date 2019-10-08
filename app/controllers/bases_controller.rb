@@ -28,6 +28,7 @@ class BasesController < ApplicationController
   end
   
   def update
+
     if @base.update_attributes(base_params)
       flash[:success] ="拠点情報を更新しました。"
     else

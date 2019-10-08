@@ -10,8 +10,7 @@ Rails.application.routes.draw do
   get 'working_users', to:'users#working_users' 
   
   #拠点一覧
-  resources :bases do
-  end
+  resources :bases 
   
   resources :users do
     member do

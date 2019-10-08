@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :logged_in?, only: [:index,:show,:edit,:update]
   before_action :logged_in_user, only: [:show,:edit,:update,:destroy, :edit_basic_info, :update_basic_info]
   before_action :admin_user, only: [:index,:edit,:update,:destroy]
+  before_action :admin_or_correct_user, only: [:edit,:update]
   before_action :set_one_month, only: [:show]
   
   
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
   
   def update
     if @user.update_attributes(user_params)
-      flash[:success]  ="情報を更新しました。"
+      flash[:success]  ="#{@user.name}さんの情報を更新しました。"
       redirect_to users_path
     else
       flash[:danger]="情報の更新が失敗しました。<br>" + @user.errors.full_messages.join('<br>')
