@@ -1,7 +1,7 @@
 class AttendancesController < ApplicationController
   before_action :set_user,only: [:edit_one_month,:update_one_month]
   before_action :logged_in_user, only: [:update,:edit_one_month]
-  before_action :set_one_month,only: [:edit_one_month]
+  before_action :set_one_month,only: [:edit_one_month,:update_one_month]
   before_action :admin_or_correct_user, only: [:update,:edit_one_month]
   
   UPDATE_ERROR_MSG = "登録に失敗しました。やり直してください。"
@@ -32,7 +32,7 @@ class AttendancesController < ApplicationController
   def update_one_month
     
     if attendances_invalid?
-      ActiveRecord::Base.transaction do
+      ActiveRecord::Base.transaction do 
         attendances_params.each do |id,item|
           attendance = Attendance.find(id)
           attendance.update_attributes!(item)
@@ -41,8 +41,8 @@ class AttendancesController < ApplicationController
       flash[:success] = "勤怠情報を更新しました。"
       redirect_to user_url(date: params[:date])
     else
-     flash[:danger]="無効な時刻入力がありました。やり直してください。"
-     redirect_to attendances_edit_one_month_user_url(date: params[:date])
+      flash[:danger]="無効な時刻入力がありました。やり直してください。"
+      redirect_to attendances_edit_one_month_user_url(date: params[:date])
     end
   
   rescue ActiveRecord::RecordInvalid
@@ -52,24 +52,24 @@ class AttendancesController < ApplicationController
   
   private
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at,:finished_at,:note,:worked_on])[:attendances]
+      params.require(:user).permit(attendances: [:started_at,:finished_at,:note,:worked_on,:suppoter])[:attendances]
     end
     
     def attendances_invalid?
       attendances = true
       attendances_params.each do |id,item|
-        unless Date.current == item[:worked_on]
-          if item[:started_at].blank? && item[:finished_at].blank?
-            next
-          elsif item[:started_at] > item[:finished_at]
-            attendances = false
-            break
-          elsif item[:started_at].blank? || item[:finished_at].blank?
-            attendances = false
-            break
-          end
+        
+        if item[:started_at].blank? && item[:finished_at].blank?
+          next
+        elsif item[:started_at] > item[:finished_at]
+          attendances = false
+          break
+        elsif item[:started_at].blank? || item[:finished_at].blank?
+          attendances = false
+          break
         end
         return attendances
       end
     end
+
 end
