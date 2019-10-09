@@ -3,11 +3,11 @@
     <%= f.label :base_number,class: "label-#{yield(:class_text)}" %>
     <%= f.number_field :base_number,class:"form-control" %>
     
-    <%= f.label :name,class: "label-#{yield(:class_text)}" %>
-    <%= f.text_field :name,class:"form-control" %>
+    <%= f.label :base_name,class: "label-#{yield(:class_text)}" %>
+    <%= f.text_field :base_name,class:"form-control" %>
     
-    <%= f.label :bases_status,class: "label-#{yield(:class_text)}" %>
-    <%= f.text_field :bases_status,class:"form-control" %>
+    <%= f.label :base_status,class: "label-#{yield(:class_text)}" %>
+    <%= f.text_field :base_status,class:"form-control" %>
     
     <%= f.submit yield(:button_text),class:"btn btn-primary btn-block btn-#{yield(:class_text)}" %>
   </div>
